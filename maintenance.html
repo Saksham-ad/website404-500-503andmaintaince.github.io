@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="refresh" content="60">
+    <title>Maintenance Mode</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom, #003366, #ffffff); /* Dark blue to white gradient */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .maintenance-container {
+            text-align: center;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 600px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #003366; /* Dark blue color for the heading */
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-size: 1.1rem;
+            color: #666;
+        }
+
+        .timer {
+            margin-top: 20px;
+            font-size: 1.2rem;
+            color: #003366; /* Dark blue color for the timer */
+        }
+    </style>
+</head>
+<body>
+    <div class="maintenance-container">
+        <h1>We'll Be Back Soon!</h1>
+        <p>We are currently performing some maintenance. Please check back later.</p>
+        <div class="timer">
+            <p>Estimated time remaining:</p>
+            <p id="countdown"></p>
+        </div>
+    </div>
+
+    <script>
+        // Set the date we're counting down to (e.g., 30 minutes from now)
+        const maintenanceEndTime = new Date(new Date().getTime() + 30 * 60 * 1000);
+
+        // Update the countdown every 1 second
+        const countdownElement = document.getElementById('countdown');
+
+        const updateCountdown = () => {
+            const now = new Date().getTime();
+            const timeRemaining = maintenanceEndTime - now;
+
+            const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+
+            if (timeRemaining > 0) {
+                countdownElement.innerHTML = `${hours}h ${minutes}m ${seconds}s`;
+            } else {
+                countdownElement.innerHTML = "Maintenance Complete!";
+            }
+        };
+
+        // Call updateCountdown every second
+        setInterval(updateCountdown, 1000);
+    </script>
+</body>
+</html>
+
